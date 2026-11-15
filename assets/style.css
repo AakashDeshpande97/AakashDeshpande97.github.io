@@ -242,3 +242,12 @@ h2.sec{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:760;font-variation-setting
 @media (max-width:560px){.lead-list li{grid-template-columns:1fr;gap:2px}}
 .gallery figure:not(.wide) button{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
 .gallery figure:not(.wide) button img{width:100%;height:100%;object-fit:contain}
+
+/* subtle graduation photo behind inner pages */
+html{background:var(--paper)}
+body.inner{background:transparent;position:relative}
+body.inner::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:url("img/graduation-bg.jpg") center 35%/cover no-repeat;opacity:.06}
+body.inner .page-head{background-color:transparent}
+body.inner .next{background:rgba(251,251,248,.85)}
+body.inner .fun{background:transparent}
