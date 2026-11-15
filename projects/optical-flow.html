@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classical and deep optical flow on Fourier ptychographic microscopy · Aakash Deshpande</title>
+<meta name="description" content="Comparing Horn–Schunck and TV-L1 against RAFT, PWC-Net and other deep models for aligning microscope images of a leech.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../assets/img/aakash.jpg" alt="">Aakash Deshpande</a>
+  <button class="menu-btn" type="button" aria-expanded="false">Menu</button>
+  <nav aria-label="Main"><ul><li><a href="../projects.html" aria-current="page">Projects</a></li><li><a href="../experience.html">Experience</a></li><li><a href="../skills.html">Skills</a></li><li><a href="../education.html">Languages &amp; education</a></li><li><a href="../contact.html">Let&#x27;s talk</a></li></ul></nav>
+</div></header>
+
+<main>
+<div class="page-head"><div class="wrap">
+  <p class="crumbs"><a href="../projects.html">Projects</a> / AI · Computer vision</p>
+  <h1>Classical and deep optical flow on Fourier ptychographic microscopy</h1>
+  <div class="meta">
+    <div><span>Type</span><b>Research project</b></div>
+    <div><span>When</span><b>Aug 2024 – Jul 2025</b></div>
+    <div><span>Context</span><b>University of Siegen</b></div>
+  </div>
+  <div class="actions"><a class="btn primary" href="https://github.com/AakashDeshpande97/Classical-and-Deep-Optical-Flow-on-Fourier-Ptychographic-Microscopy-Measurements" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.170-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>View code on GitHub</a></div>
+</div></div>
+<div class="page-body"><div class="wrap">
+  <section class="overview">
+    <div class="prose"><h2 class="sec">Overview</h2><p>How well do motion-estimation methods work on microscope images? Using leech images from a Fourier ptychographic microscope, I compared classical optical flow algorithms with modern deep networks, then checked each result by warping the images and measuring how well they line up. Supervised by Dr. John Meshreki.</p></div>
+    <aside class="figs" aria-label="Key figures"><div class="fig"><strong>2 + 20</strong><small>classical methods, and 20+ pretrained deep models available through PTLFlow</small></div><div class="fig"><strong>~80 images</strong><small>per crop grid, each aligned to the centre tile</small></div><div class="fig"><strong>Lower MAE</strong><small>after warping, for every method</small></div></aside>
+  </section>
+  <section><h2 class="sec">How it works</h2><ol class="steps"><li><b>Prepare data</b><span>Brightfield images extracted from EXR and standardised to grayscale PNG.</span></li><li><b>Classical flow</b><span>Horn–Schunck and TV-L1, multi-scale, with tuned parameters.</span></li><li><b>Deep flow</b><span>RAFT, CRAFT, PWC-Net, FlowNet2, LiteFlowNet and others via PTLFlow.</span></li><li><b>Visualise</b><span>X and Y components, direction-and-magnitude colour maps, heatmaps.</span></li><li><b>Evaluate</b><span>Warp each image to the reference and compare MAE before and after.</span></li></ol></section>
+  <section><h2 class="sec">What I did</h2><ul class="points">
+<li>Built a pipeline that processes whole grids of microscope images in batches, with the centre tile as the reference frame.</li>
+<li>Used the PTLFlow framework (PyTorch Lightning) for inference with many pretrained models through one API.</li>
+<li>Wrote post-processing to warp images with the predicted flow fields, and custom visualisations laid out to match the microscope's grid.</li>
+</ul>
+<h3 class="sec" style="font-size:1.25rem;margin-top:30px">What I found</h3>
+<ul class="points">
+<li>Horn–Schunck and TV-L1 were robust, interpretable baselines on this data.</li>
+<li>Deep models gave promising results but sometimes produced motion that isn't there, because they were trained on natural images. Retraining on microscopy data would be the next step.</li>
+<li>MAE dropped after warping for all methods, confirming the flow fields align the images.</li>
+</ul></section>
+  <section><h2 class="sec">Screenshots and results</h2><p class="muted">Click any image to enlarge it.</p><div class="sub-gallery"><h3>The data</h3><div class="gallery"><figure><button type="button" data-full="../assets/img/optical-flow/leech.jpg" aria-label="Enlarge: Full leech image from the Fourier ptychographic microscope."><img src="../assets/img/optical-flow/leech.jpg" alt="Full leech image from the Fourier ptychographic microscope." loading="lazy"></button><figcaption><b>Full leech image</b> from the Fourier ptychographic microscope.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/leech-grid.jpg" aria-label="Enlarge: Crop grid. The image split into numbered crops; each crop is a grid of tiles."><img src="../assets/img/optical-flow/leech-grid.jpg" alt="Crop grid. The image split into numbered crops; each crop is a grid of tiles." loading="lazy"></button><figcaption><b>Crop grid.</b> The image split into numbered crops; each crop is a grid of tiles.</figcaption></figure></div></div><div class="sub-gallery"><h3>Flow results for crop 41</h3><div class="gallery"><figure><button type="button" data-full="../assets/img/optical-flow/flow-rgb.jpg" aria-label="Enlarge: Flow as colour. Hue shows direction, brightness shows magnitude, for every tile."><img src="../assets/img/optical-flow/flow-rgb.jpg" alt="Flow as colour. Hue shows direction, brightness shows magnitude, for every tile." loading="lazy"></button><figcaption><b>Flow as colour.</b> Hue shows direction, brightness shows magnitude, for every tile.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/flow-x.jpg" aria-label="Enlarge: X component of the flow for every tile."><img src="../assets/img/optical-flow/flow-x.jpg" alt="X component of the flow for every tile." loading="lazy"></button><figcaption><b>X component</b> of the flow for every tile.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/heat-x.jpg" aria-label="Enlarge: X magnitude heatmaps with per-tile scales."><img src="../assets/img/optical-flow/heat-x.jpg" alt="X magnitude heatmaps with per-tile scales." loading="lazy"></button><figcaption><b>X magnitude heatmaps</b> with per-tile scales.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/heat-y.jpg" aria-label="Enlarge: Y magnitude heatmaps with per-tile scales."><img src="../assets/img/optical-flow/heat-y.jpg" alt="Y magnitude heatmaps with per-tile scales." loading="lazy"></button><figcaption><b>Y magnitude heatmaps</b> with per-tile scales.</figcaption></figure></div></div><div class="sub-gallery"><h3>Checking the alignment</h3><div class="gallery"><figure><button type="button" data-full="../assets/img/optical-flow/overlay-original.jpg" aria-label="Enlarge: Overlay before warping. Each tile on top of the reference."><img src="../assets/img/optical-flow/overlay-original.jpg" alt="Overlay before warping. Each tile on top of the reference." loading="lazy"></button><figcaption><b>Overlay before warping.</b> Each tile on top of the reference.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/overlay-warped.jpg" aria-label="Enlarge: Overlay after warping. The tiles now line up with the reference."><img src="../assets/img/optical-flow/overlay-warped.jpg" alt="Overlay after warping. The tiles now line up with the reference." loading="lazy"></button><figcaption><b>Overlay after warping.</b> The tiles now line up with the reference.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/mae-before.jpg" aria-label="Enlarge: Absolute difference before warping, with the MAE for each tile."><img src="../assets/img/optical-flow/mae-before.jpg" alt="Absolute difference before warping, with the MAE for each tile." loading="lazy"></button><figcaption><b>Absolute difference before warping</b>, with the MAE for each tile.</figcaption></figure><figure><button type="button" data-full="../assets/img/optical-flow/mae-after.jpg" aria-label="Enlarge: Absolute difference after warping. Lower values mean better alignment."><img src="../assets/img/optical-flow/mae-after.jpg" alt="Absolute difference after warping. Lower values mean better alignment." loading="lazy"></button><figcaption><b>Absolute difference after warping.</b> Lower values mean better alignment.</figcaption></figure></div></div></section>
+  <section><h2 class="sec">Tools</h2><div class="tags"><span>Python</span><span>PyTorch</span><span>PyTorch Lightning</span><span>PTLFlow</span><span>RAFT</span><span>PWC-Net</span><span>CRAFT</span><span>Horn–Schunck</span><span>TV-L1</span><span>OpenCV</span><span>NumPy</span><span>Matplotlib</span></div></section>
+</div></div>
+</main>
+<div class="next"><div class="wrap"><a href="robot.html"><small>Previous</small><b>Real-time object detection on a Raspberry Pi for an autonomous robot</b></a><a class="fwd" href="denoising.html"><small>Next</small><b>Self-supervised denoising of microscopic images</b></a></div></div><footer class="foot"><div class="wrap">© 2026 Aakash Deshpande · <a href="../index.html">Home</a></div></footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
