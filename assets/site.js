@@ -37,3 +37,16 @@
     items.forEach(function(li){li.hidden=!(f==='all'||li.dataset.kind===f);});
   });});
 })();
+
+// Copy email: works even where mailto links are blocked (in-app browsers)
+(function(){
+  [].forEach.call(document.querySelectorAll('.copy[data-copy]'),function(b){
+    b.addEventListener('click',function(){
+      var t=b.dataset.copy,label=b.textContent;
+      function done(){b.textContent='Copied';setTimeout(function(){b.textContent=label;},1800);}
+      function fallback(){var i=document.createElement('textarea');i.value=t;i.setAttribute('readonly','');i.style.position='fixed';i.style.opacity='0';
+        document.body.appendChild(i);i.select();try{document.execCommand('copy');done();}catch(e){b.textContent=t;}document.body.removeChild(i);}
+      try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,fallback);}else{fallback();}}catch(e){fallback();}
+    });
+  });
+})();

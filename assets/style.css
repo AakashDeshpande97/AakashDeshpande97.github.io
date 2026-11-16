@@ -251,3 +251,17 @@ body.inner::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:n
 body.inner .page-head{background-color:transparent}
 body.inner .next{background:rgba(251,251,248,.85)}
 body.inner .fun{background:transparent}
+
+/* copy-email buttons */
+.copy{font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;padding:4px 10px;margin-left:10px;border:1.5px solid currentColor;background:transparent;color:inherit;vertical-align:middle}
+.copy:hover{border-color:var(--ruby)}
+.me .addr{margin-top:14px;font-size:.98rem;color:#DDE1E7;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.me .addr .copy{margin-left:0;border-color:rgba(251,251,248,.55)}
+.rows .mailrow{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid #39424F;align-items:center}
+.rows .mailrow b a{text-decoration:none}
+.rows .mailrow b a:hover{text-decoration:underline;text-decoration-color:#E0566E;text-underline-offset:4px}
+.rows .mailrow .copy{border-color:rgba(251,251,248,.55)}
+.rows .mailrow b{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.rows .mailrow b a{display:inline;padding:0;border:0;grid-template-columns:none}
+.rows .mailrow b .copy{margin-left:0}
+@media (max-width:560px){.rows a,.rows div,.rows .mailrow{grid-template-columns:84px minmax(0,1fr)}}
