@@ -303,3 +303,20 @@ body.inner .fun{background:transparent}
 .me .photo-wrap{position:relative;min-height:clamp(440px,60vh,680px);overflow:hidden}
 .me .photo-wrap .photo{position:absolute;inset:0;width:100%;height:100%;min-height:0;object-fit:cover;object-position:50% 18%}
 @media (max-width:900px){.me .photo-wrap{height:62vh;min-height:360px}}
+
+/* light contact rows */
+.rows.light{border-top-color:var(--ink)}
+.rows.light a,.rows.light div,.rows.light .mailrow{border-bottom-color:var(--rule)}
+.rows.light span{color:var(--steel)}
+.rows.light b{color:var(--ink)}
+.rows.light a:hover b,.rows.light .mailrow b a:hover{text-decoration-color:var(--ruby)}
+.rows.light .mailrow .copy{border-color:var(--ink);color:var(--ink)}
+.rows.light .mailrow b span{color:inherit}
+.rows.light{font-size:1.1rem}
+/* qualities */
+.qualities{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 24px}
+.qualities span{padding:8px 14px;background:var(--ink);color:var(--sheet);font-weight:600;font-size:.98rem}
+.hobby{background:rgba(251,251,248,.92)}
+/* home: six rows */
+.menu a{padding-top:16px;padding-bottom:16px}
+.menu a .name{font-size:clamp(1.5rem,2.3vw,2rem)}

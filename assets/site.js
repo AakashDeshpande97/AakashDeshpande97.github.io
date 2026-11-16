@@ -38,6 +38,35 @@
   });});
 })();
 
+
+// Open in the real browser when the page is shown inside an app (WhatsApp, LinkedIn, Instagram...).
+// In-app browsers often block email links; Android can hand the page to Chrome, iPhone cannot.
+(function(){
+  var ua=navigator.userAgent||'';
+  var inApp=/WhatsApp|LinkedInApp|Instagram|FBAN|FBAV|FB_IAB|Snapchat|Line\/|Telegram|; wv\)/i.test(ua);
+  if(!inApp)return;
+  var android=/Android/i.test(ua), ios=/iPhone|iPad|iPod/i.test(ua);
+  var url=location.href;
+  var intent='intent://'+location.host+location.pathname+location.search+location.hash+
+    '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url)+';end';
+  // Android: try once per visit to hand the page over to Chrome automatically
+  if(android){
+    var tried=false;try{tried=sessionStorage.getItem('openedInBrowser')==='1';sessionStorage.setItem('openedInBrowser','1');}catch(e){}
+    if(!tried){location.href=intent;}
+  }
+  // Fallback banner, in case the app blocked the hand-over
+  var bar=document.createElement('div');bar.className='inapp';
+  if(android){
+    bar.innerHTML='<span>You\'re viewing this inside an app. For the best experience, open it in your browser.</span><a class="inapp-btn" href="'+intent+'">Open in Chrome</a>';
+  }else{
+    bar.innerHTML='<span>You\'re viewing this inside an app. For the best experience, tap the '+(ios?'menu and choose <b>Open in Safari</b>':'menu and choose <b>Open in browser</b>')+'.</span>';
+  }
+  var x=document.createElement('button');x.type='button';x.className='inapp-x';x.setAttribute('aria-label','Dismiss');x.textContent='\u00d7';
+  x.addEventListener('click',function(){bar.remove();});
+  bar.appendChild(x);
+  document.body.insertBefore(bar,document.body.firstChild);
+})();
+
 // Copy email: works even where mailto links are blocked (in-app browsers)
 (function(){
   [].forEach.call(document.querySelectorAll('.copy[data-copy]'),function(b){
